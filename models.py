@@ -1,22 +1,6 @@
 from django.db import models
 from datetime import date
 
-
-MONTHS = [
-    ('ENE', 'Enero'),
-    ('FEB', 'Febrero'),
-    ('MAR', 'Marzo'),
-    ('ABR', 'Abril'),
-    ('MAY', 'Mayo'),
-    ('JUN', 'Junio'),
-    ('JUL', 'Julio'),
-    ('AGO', 'Agosto'),
-    ('SEP', 'Septiembre'),
-    ('OCT', 'Octubre'),
-    ('NOV', 'Noviembre'),
-    ('DIC', 'Diciembre'),
-    ]
-
 class Category(models.Model):
     category_name = models.CharField(max_length=20)
     
@@ -33,7 +17,7 @@ class Expense(models.Model):
         return expense_str
 
 class CreditBalance(models.Model):
-    month = models.CharField(max_length=3, choices=MONTHS)
+    month = models.CharField(max_length=3, default=date.today().month)
     credit_expenses = models.ManyToManyField(Expense, verbose_name="List of expenses")
     balance = models.FloatField()
     
